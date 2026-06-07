@@ -1,0 +1,55 @@
+service: pago-libelula-cuartiario
+
+frameworkVersion: "4"
+console: false
+
+provider:
+  name: aws
+  runtime: python3.12
+  stage: dev
+  region: us-east-1
+  memorySize: 512
+  timeout: 30
+  environment:
+    DATABASE_URL: ${env:DATABASE_URL}
+    LIBELULA_APPKEY: ${env:LIBELULA_APPKEY}
+    LIBELULA_API_URL: ${env:LIBELULA_API_URL}
+    SELF_URL: ${env:SELF_URL}
+
+useDotenv: true
+
+custom:
+  pythonRequirements:
+    dockerizePip: false
+    layer: false
+    pipCmdExtraArgs:
+      - "--platform"
+      - "manylinux2014_x86_64"
+      - "--python-version"
+      - "3.12"
+      - "--implementation"
+      - "cp"
+      - "--only-binary"
+      - ":all:"
+
+package:
+  individually: true
+  exclude:
+    - venv/**
+    - .venv/**
+    - .git/**
+    - .serverless/**
+    - README.md
+
+functions:
+  api:
+    handler: handler.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
