@@ -20,7 +20,7 @@ class Proyecto(Base):
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String(255), nullable=False)
     api_key = Column(String(255), unique=True, nullable=False, index=True)
-    callback_url = Column(String(500), nullable=True)
+    callback_url = Column(String(500), unique=True, nullable=True)
     retorno_url = Column(String(500), nullable=True)
     usuario_id = Column(Integer, ForeignKey("usuario.id"), nullable=False)
     activo = Column(Boolean, default=True)
@@ -33,7 +33,6 @@ class Pago(Base):
     __tablename__ = "pago"
 
     id = Column(Integer, primary_key=True, index=True)
-    identificador = Column(String(255), index=True)
     fecha_inicio = Column(DateTime(timezone=True))
     fecha_fin = Column(DateTime(timezone=True), nullable=True)
     monto = Column(Numeric(10, 2), nullable=False)
