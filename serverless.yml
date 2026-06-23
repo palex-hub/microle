@@ -19,7 +19,7 @@ provider:
 custom:
   pythonRequirements:
     dockerizePip: false
-    layer: false
+    layer: true
     pipCmdExtraArgs:
       - "--platform"
       - "manylinux2014_x86_64"
