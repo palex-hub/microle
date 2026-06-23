@@ -11,12 +11,10 @@ provider:
   memorySize: 512
   timeout: 30
   environment:
-    DATABASE_URL: ${env:DATABASE_URL}
-    LIBELULA_APPKEY: ${env:LIBELULA_APPKEY}
-    LIBELULA_API_URL: ${env:LIBELULA_API_URL}
-    SELF_URL: ${env:SELF_URL}
-
-useDotenv: true
+    DATABASE_URL: ${ssm:/pago-libelula/dev/DATABASE_URL}
+    LIBELULA_APPKEY: ${ssm:/pago-libelula/dev/LIBELULA_APPKEY}
+    LIBELULA_API_URL: ${ssm:/pago-libelula/dev/LIBELULA_API_URL}
+    SELF_URL: ${ssm:/pago-libelula/dev/SELF_URL}
 
 custom:
   pythonRequirements:
