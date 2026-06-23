@@ -10,6 +10,10 @@ class LineaDetalleDeuda(BaseModel):
     codigo_producto: Optional[str] = None
 
 
+class ConsultaDeudaRequest(BaseModel):
+    identificador: str
+
+
 class RegistrarDeudaRequest(BaseModel):
     email_cliente: str
     identificador: str
